@@ -10,6 +10,7 @@ export default function IngredientsPage() {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [filtered, setFiltered] = useState<Ingredient[]>([]);
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -26,6 +27,7 @@ export default function IngredientsPage() {
   const handleSearch = useCallback(
     (query: string) => {
       setSearch(query);
+      setCurrentPage(1); // Reset page on search
       if (!query.trim()) {
         setFiltered(ingredients);
       } else {
@@ -38,6 +40,13 @@ export default function IngredientsPage() {
       }
     },
     [ingredients]
+  );
+
+  const ITEMS_PER_PAGE = 30;
+  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+  const paginatedIngredients = filtered.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
   );
 
   return (
@@ -105,10 +114,10 @@ export default function IngredientsPage() {
       {/* Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 animate-stagger">
         {loading
-          ? Array.from({ length: 24 }).map((_, i) => (
+          ? Array.from({ length: ITEMS_PER_PAGE }).map((_, i) => (
               <IngredientSkeleton key={i} />
             ))
-          : filtered.map((ing, i) => (
+          : paginatedIngredients.map((ing, i) => (
               <IngredientCard
                 key={ing.idIngredient}
                 name={ing.strIngredient}
@@ -116,6 +125,32 @@ export default function IngredientsPage() {
               />
             ))}
       </div>
+
+      {/* Pagination Controls */}
+      {!loading && !error && filtered.length > ITEMS_PER_PAGE && (
+        <div className="mt-12 flex items-center justify-center gap-4 animate-fade-in-up">
+          <button
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+            disabled={currentPage === 1}
+            className="px-5 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-700 text-sm font-semibold hover:bg-gray-50 focus:ring-4 focus:ring-orange-500/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          >
+            Previous
+          </button>
+          
+          <div className="text-gray-600 text-sm font-medium">
+            Page <span className="text-gray-900">{currentPage}</span> of{" "}
+            <span className="text-gray-900">{totalPages}</span>
+          </div>
+          
+          <button
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+            disabled={currentPage === totalPages}
+            className="px-5 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-700 text-sm font-semibold hover:bg-gray-50 focus:ring-4 focus:ring-orange-500/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 }
