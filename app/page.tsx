@@ -10,7 +10,7 @@ export default function IngredientsPage() {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [filtered, setFiltered] = useState<Ingredient[]>([]);
   const [search, setSearch] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [displayedCount, setDisplayedCount] = useState(30);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -27,7 +27,7 @@ export default function IngredientsPage() {
   const handleSearch = useCallback(
     (query: string) => {
       setSearch(query);
-      setCurrentPage(1); // Reset page on search
+      setDisplayedCount(30); // Reset count on search
       if (!query.trim()) {
         setFiltered(ingredients);
       } else {
@@ -43,11 +43,11 @@ export default function IngredientsPage() {
   );
 
   const ITEMS_PER_PAGE = 30;
-  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
-  const paginatedIngredients = filtered.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
-  );
+  const currentIngredients = filtered.slice(0, displayedCount);
+  const hasMore = displayedCount < filtered.length;
+
+  // We can use the first 10 items of the base ingredients array as "Featured" when no search is active
+  const featuredIngredients = ingredients.slice(0, 10);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
@@ -111,13 +111,56 @@ export default function IngredientsPage() {
         </div>
       )}
 
+      {/* Featured Slider (Hidden during search) */}
+      {!loading && !error && !search && featuredIngredients.length > 0 && (
+        <div className="mb-16 animate-fade-in-up">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-bold text-gray-900">
+              Top Categories
+            </h2>
+            <div className="flex gap-2">
+              <button 
+                onClick={() => document.getElementById('featured-slider')?.scrollBy({ left: -300, behavior: 'smooth' })}
+                className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-400 hover:text-gray-900 hover:shadow-md transition-all">
+                ←
+              </button>
+              <button 
+                onClick={() => document.getElementById('featured-slider')?.scrollBy({ left: 300, behavior: 'smooth' })}
+                className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-400 hover:text-gray-900 hover:shadow-md transition-all">
+                →
+              </button>
+            </div>
+          </div>
+          
+          {/* Snap scrolling horizontal slider */}
+          <div 
+            id="featured-slider"
+            className="flex overflow-x-auto gap-4 sm:gap-6 pb-6 snap-x snap-mandatory hide-scrollbar"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            {featuredIngredients.map((ing, i) => (
+              <div key={`featured-${ing.idIngredient}`} className="snap-start shrink-0 w-[160px] sm:w-[200px]">
+                <IngredientCard name={ing.strIngredient} index={i + 10} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Grid Header */}
+      {!loading && !error && (
+        <h2 className="text-2xl font-bold text-gray-900 mb-6 px-1">
+          {search ? "Search Results" : "All Ingredients"}
+        </h2>
+      )}
+
       {/* Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 animate-stagger">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6 animate-stagger">
         {loading
           ? Array.from({ length: ITEMS_PER_PAGE }).map((_, i) => (
               <IngredientSkeleton key={i} />
             ))
-          : paginatedIngredients.map((ing, i) => (
+          : currentIngredients.map((ing, i) => (
               <IngredientCard
                 key={ing.idIngredient}
                 name={ing.strIngredient}
@@ -126,28 +169,21 @@ export default function IngredientsPage() {
             ))}
       </div>
 
-      {/* Pagination Controls */}
-      {!loading && !error && filtered.length > ITEMS_PER_PAGE && (
-        <div className="mt-12 flex items-center justify-center gap-4 animate-fade-in-up">
+      {/* Load More Button */}
+      {!loading && !error && hasMore && (
+        <div className="mt-16 mb-8 flex justify-center animate-fade-in-up">
           <button
-            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-            disabled={currentPage === 1}
-            className="px-5 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-700 text-sm font-semibold hover:bg-gray-50 focus:ring-4 focus:ring-orange-500/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            onClick={() => setDisplayedCount((prev) => prev + ITEMS_PER_PAGE)}
+            className="group relative px-8 py-3 bg-white border border-gray-200 rounded-full font-semibold text-gray-700 hover:text-orange-600 hover:border-orange-300 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
           >
-            Previous
-          </button>
-          
-          <div className="text-gray-600 text-sm font-medium">
-            Page <span className="text-gray-900">{currentPage}</span> of{" "}
-            <span className="text-gray-900">{totalPages}</span>
-          </div>
-          
-          <button
-            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-            disabled={currentPage === totalPages}
-            className="px-5 py-2.5 border border-gray-200 rounded-xl bg-white text-gray-700 text-sm font-semibold hover:bg-gray-50 focus:ring-4 focus:ring-orange-500/10 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-          >
-            Next
+            <span className="relative z-10 flex items-center gap-2">
+              Load More
+              <svg className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+            {/* Soft gradient hover effect behind text */}
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-50 to-rose-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           </button>
         </div>
       )}
