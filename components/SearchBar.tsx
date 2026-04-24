@@ -30,10 +30,10 @@ export default function SearchBar({
         }`}
       />
       <div
-        className={`relative flex items-center w-full rounded-2xl border transition-all duration-300 bg-white/5 backdrop-blur-sm ${
+        className={`relative flex items-center w-full rounded-xl border transition-all duration-300 bg-[#111] backdrop-blur-sm ${
           focused
-            ? "border-orange-400/60 shadow-lg shadow-orange-500/10"
-            : "border-white/10 hover:border-white/20"
+            ? "border-orange-500/50 shadow-lg shadow-orange-500/10"
+            : "border-[#222] hover:border-[#333]"
         }`}
       >
         <div className="pl-4 pr-2 text-gray-400">

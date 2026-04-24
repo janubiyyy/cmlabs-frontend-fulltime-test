@@ -27,14 +27,14 @@ export default function IngredientCard({ name, index }: IngredientCardProps) {
   return (
     <Link
       href={`/ingredients/${encodeURIComponent(name)}`}
-      className="group relative bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.03] hover:shadow-2xl hover:shadow-orange-500/10 cursor-pointer"
+      className="group relative bg-[#111] hover:bg-[#1a1a1a] border border-[#222] hover:border-[#333] rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/20 cursor-pointer"
     >
       {/* gradient top bar */}
       <div className={`h-1 w-full bg-gradient-to-r ${colorClass}`} />
 
       <div className="p-4 flex flex-col items-center gap-3">
         {/* ingredient image */}
-        <div className="relative w-20 h-20 rounded-xl overflow-hidden bg-white/10 flex items-center justify-center">
+        <div className="relative w-20 h-20 rounded-xl overflow-hidden bg-[#222] group-hover:bg-[#333] transition-colors duration-500 flex items-center justify-center">
           <Image
             src={imageUrl}
             alt={name}

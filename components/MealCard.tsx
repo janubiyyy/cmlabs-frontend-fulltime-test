@@ -14,10 +14,10 @@ export default function MealCard({ id, name, thumb }: MealCardProps) {
   return (
     <Link
       href={`/meals/${id}`}
-      className="group relative bg-white/5 hover:bg-white/10 border border-white/10 hover:border-orange-400/30 rounded-2xl overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-orange-500/10 cursor-pointer"
+      className="group relative bg-[#111] hover:bg-[#1a1a1a] border border-[#222] hover:border-orange-500/30 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/20 cursor-pointer"
     >
       {/* Meal Image */}
-      <div className="relative aspect-video overflow-hidden bg-gray-800">
+      <div className="relative aspect-video overflow-hidden bg-[#0a0a0a]">
         <Image
           src={thumb}
           alt={name}
