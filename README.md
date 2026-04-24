@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MealFinder - CMLABS Frontend Practical Test
 
-## Getting Started
+A modern, responsive meal discovery application built with **Next.js 15** + **TypeScript** + **Tailwind CSS**, powered by [TheMealDB API](https://www.themealdb.com).
 
-First, run the development server:
+## 🚀 Features
+
+- **Ingredients Page** — Browse 500+ ingredients with real images, animated cards, and front-end search
+- **Ingredients Detail Page** — View all meals containing a selected ingredient, with front-end search
+- **Meal Detail Page** — Full recipe with image, category/area tags, ingredient list, step-by-step instructions, and embedded YouTube tutorial
+
+## 🛠 Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **API**: TheMealDB (public, no key required)
+- **Fonts**: Geist (via `next/font`)
+
+## 📦 Getting Started
+
+### Prerequisites
+- Node.js 18+
+- npm 9+
+
+### Installation
 
 ```bash
+# 1. Clone the repository
+git clone https://github.com/YOUR_USERNAME/cmlabs-frontend-fulltime-test.git
+cd cmlabs-frontend-fulltime-test
+
+# 2. Install dependencies
+npm install
+
+# 3. Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+## 📁 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+├── app/
+│   ├── layout.tsx               # Root layout with Navbar
+│   ├── globals.css              # Global styles + animations
+│   ├── page.tsx                 # Ingredients list (home)
+│   ├── ingredients/
+│   │   └── [name]/page.tsx      # Ingredients detail (meals by ingredient)
+│   └── meals/
+│       └── [id]/page.tsx        # Meal detail
+├── components/
+│   ├── Navbar.tsx               # Glassmorphism sticky navbar
+│   ├── SearchBar.tsx            # Animated search input
+│   ├── IngredientCard.tsx       # Ingredient card with image
+│   ├── MealCard.tsx             # Meal card with hover effects
+│   ├── SkeletonCard.tsx         # Skeleton loading states
+│   └── YoutubeEmbed.tsx         # Click-to-load YouTube embed
+└── lib/
+    └── api.ts                   # TheMealDB API helpers & types
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🌐 API Endpoints Used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Endpoint | URL |
+|---|---|
+| List Ingredients | `themealdb.com/api/json/v1/1/list.php?i=list` |
+| Filter by Ingredient | `themealdb.com/api/json/v1/1/filter.php?i={name}` |
+| Meal Detail | `themealdb.com/api/json/v1/1/lookup.php?i={id}` |
 
-## Deploy on Vercel
+## 📱 Responsive
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Fully responsive for desktop, iPad (tablet), and mobile screens.
