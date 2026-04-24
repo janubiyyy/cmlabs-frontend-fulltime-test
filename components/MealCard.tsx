@@ -14,10 +14,10 @@ export default function MealCard({ id, name, thumb }: MealCardProps) {
   return (
     <Link
       href={`/meals/${id}`}
-      className="group relative bg-[#111] hover:bg-[#1a1a1a] border border-[#222] hover:border-orange-500/30 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/20 cursor-pointer"
+      className="group relative bg-white hover:bg-gray-50 border border-gray-200 hover:border-orange-300 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-500/10 cursor-pointer"
     >
       {/* Meal Image */}
-      <div className="relative aspect-video overflow-hidden bg-[#0a0a0a]">
+      <div className="relative aspect-video overflow-hidden bg-gray-100">
         <Image
           src={thumb}
           alt={name}
@@ -47,10 +47,10 @@ export default function MealCard({ id, name, thumb }: MealCardProps) {
 
       {/* Info */}
       <div className="p-4">
-        <h3 className="text-white font-semibold text-sm leading-snug line-clamp-2 group-hover:text-orange-300 transition-colors">
+        <h3 className="text-gray-900 font-semibold text-sm leading-snug line-clamp-2 group-hover:text-orange-600 transition-colors">
           {name}
         </h3>
-        <p className="text-gray-500 text-xs mt-2 group-hover:text-orange-400/70 transition-colors">
+        <p className="text-gray-500 text-xs mt-2 group-hover:text-orange-500 transition-colors">
           View Recipe →
         </p>
       </div>

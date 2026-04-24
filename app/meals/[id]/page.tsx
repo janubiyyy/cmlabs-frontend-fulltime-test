@@ -35,7 +35,7 @@ export default function MealDetailPage() {
       {/* Back */}
       <button
         onClick={() => router.back()}
-        className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8 group"
+        className="flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors mb-8 group"
       >
         <svg
           className="w-4 h-4 group-hover:-translate-x-1 transition-transform"
@@ -83,19 +83,19 @@ export default function MealDetailPage() {
               priority
               unoptimized
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-gray-950/60 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-transparent to-transparent" />
           </div>
 
           {/* Title & Meta */}
           <div className="mb-8">
             <div className="flex flex-wrap gap-2 mb-4">
               {meal.strCategory && (
-                <span className="px-3 py-1 rounded-full bg-orange-500/20 border border-orange-500/30 text-orange-400 text-xs font-medium">
+                <span className="px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-orange-600 text-xs font-medium">
                   {meal.strCategory}
                 </span>
               )}
               {meal.strArea && (
-                <span className="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-400 text-xs font-medium">
+                <span className="px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-600 text-xs font-medium">
                   🌍 {meal.strArea}
                 </span>
               )}
@@ -106,13 +106,13 @@ export default function MealDetailPage() {
                   .map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-gray-400 text-xs font-medium"
+                      className="px-3 py-1 rounded-full bg-gray-100 border border-gray-200 text-gray-600 text-xs font-medium"
                     >
                       #{tag.trim()}
                     </span>
                   ))}
             </div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-white leading-tight">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight">
               {meal.strMeal}
             </h1>
           </div>
@@ -120,20 +120,20 @@ export default function MealDetailPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Left: Ingredients */}
             <div className="lg:col-span-1">
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-6 sticky top-24">
-                <h2 className="text-white font-semibold text-lg mb-4 flex items-center gap-2">
+              <div className="bg-white border border-gray-200 rounded-2xl p-6 sticky top-24 shadow-sm">
+                <h2 className="text-gray-900 font-semibold text-lg mb-4 flex items-center gap-2">
                   <span>🧂</span> Ingredients
                 </h2>
                 <ul className="space-y-2">
                   {ingredients.map(({ ingredient, measure }, i) => (
                     <li
                       key={i}
-                      className="flex items-center justify-between gap-2 py-2 border-b border-white/5 last:border-0"
+                      className="flex items-center justify-between gap-2 py-2 border-b border-gray-100 last:border-0"
                     >
-                      <span className="text-gray-300 text-sm font-medium">
+                      <span className="text-gray-700 text-sm font-medium">
                         {ingredient}
                       </span>
-                      <span className="text-orange-400 text-xs text-right shrink-0">
+                      <span className="text-orange-600 font-semibold text-xs text-right shrink-0">
                         {measure}
                       </span>
                     </li>
@@ -145,8 +145,8 @@ export default function MealDetailPage() {
             {/* Right: Instructions + YouTube */}
             <div className="lg:col-span-2 space-y-8">
               {/* Instructions */}
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-                <h2 className="text-white font-semibold text-lg mb-4 flex items-center gap-2">
+              <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+                <h2 className="text-gray-900 font-semibold text-lg mb-4 flex items-center gap-2">
                   <span>📋</span> Instructions
                 </h2>
                 <div className="space-y-3">
@@ -154,7 +154,7 @@ export default function MealDetailPage() {
                     .split(/\r?\n/)
                     .filter((line) => line.trim())
                     .map((line, i) => (
-                      <p key={i} className="text-gray-400 text-sm leading-relaxed">
+                      <p key={i} className="text-gray-600 text-sm leading-relaxed">
                         {line.trim()}
                       </p>
                     ))}
@@ -163,8 +163,8 @@ export default function MealDetailPage() {
 
               {/* YouTube */}
               {youtubeEmbedUrl && (
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-6">
-                  <h2 className="text-white font-semibold text-lg mb-4 flex items-center gap-2">
+                <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+                  <h2 className="text-gray-900 font-semibold text-lg mb-4 flex items-center gap-2">
                     <span>🎬</span> Video Tutorial
                   </h2>
                   <YoutubeEmbed
@@ -176,13 +176,13 @@ export default function MealDetailPage() {
 
               {/* Source */}
               {meal.strSource && (
-                <div className="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center gap-3">
+                <div className="bg-white border border-gray-200 rounded-2xl p-4 flex items-center gap-3 shadow-sm">
                   <span className="text-gray-400">🔗</span>
                   <a
                     href={meal.strSource}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-orange-400 hover:text-orange-300 text-sm transition-colors truncate"
+                    className="text-orange-600 hover:text-orange-500 font-semibold text-sm transition-colors truncate"
                   >
                     View Original Recipe Source
                   </a>

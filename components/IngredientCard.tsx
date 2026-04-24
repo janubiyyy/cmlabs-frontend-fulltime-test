@@ -27,14 +27,14 @@ export default function IngredientCard({ name, index }: IngredientCardProps) {
   return (
     <Link
       href={`/ingredients/${encodeURIComponent(name)}`}
-      className="group relative bg-[#111] hover:bg-[#1a1a1a] border border-[#222] hover:border-[#333] rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-500/20 cursor-pointer"
+      className="group relative bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-500/10 cursor-pointer"
     >
       {/* gradient top bar */}
       <div className={`h-1 w-full bg-gradient-to-r ${colorClass}`} />
 
       <div className="p-4 flex flex-col items-center gap-3">
         {/* ingredient image */}
-        <div className="relative w-20 h-20 rounded-xl overflow-hidden bg-[#222] group-hover:bg-[#333] transition-colors duration-500 flex items-center justify-center">
+        <div className="relative w-20 h-20 rounded-xl overflow-hidden bg-gray-50 group-hover:bg-gray-100 transition-colors duration-500 flex items-center justify-center">
           <Image
             src={imageUrl}
             alt={name}
@@ -47,7 +47,7 @@ export default function IngredientCard({ name, index }: IngredientCardProps) {
         </div>
 
         <div className="text-center">
-          <h3 className="text-white text-sm font-semibold leading-tight line-clamp-2 group-hover:text-orange-300 transition-colors">
+          <h3 className="text-gray-900 text-sm font-semibold leading-tight line-clamp-2 group-hover:text-orange-600 transition-colors">
             {name}
           </h3>
         </div>

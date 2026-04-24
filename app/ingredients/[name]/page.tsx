@@ -52,7 +52,7 @@ export default function IngredientsDetailPage() {
       {/* Back Button */}
       <button
         onClick={() => router.back()}
-        className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8 group"
+        className="flex items-center gap-2 text-gray-500 hover:text-gray-900 transition-colors mb-8 group"
       >
         <svg
           className="w-4 h-4 group-hover:-translate-x-1 transition-transform"
@@ -72,7 +72,7 @@ export default function IngredientsDetailPage() {
 
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-10 animate-fade-in-up">
-        <div className="w-24 h-24 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center overflow-hidden shrink-0 relative">
+        <div className="w-24 h-24 rounded-2xl bg-gray-50 border border-gray-200 flex items-center justify-center overflow-hidden shrink-0 relative">
           <Image
             src={imageUrl}
             alt={ingredientName}
@@ -82,15 +82,15 @@ export default function IngredientsDetailPage() {
           />
         </div>
         <div>
-          <div className="flex items-center gap-2 text-orange-400 text-sm font-medium mb-2">
+          <div className="flex items-center gap-2 text-orange-600 text-sm font-medium mb-2">
             <span>🥘</span>
             <span>Ingredient</span>
           </div>
-          <h1 className="text-3xl sm:text-4xl font-bold text-white mb-1">
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-1">
             {ingredientName}
           </h1>
           {!loading && (
-            <p className="text-gray-400">
+            <p className="text-gray-600">
               {meals.length} meal{meals.length !== 1 ? "s" : ""} using this
               ingredient
             </p>
@@ -131,7 +131,7 @@ export default function IngredientsDetailPage() {
       {!loading && !error && filtered.length === 0 && !search && (
         <div className="text-center py-16">
           <div className="text-5xl mb-4">🍽</div>
-          <p className="text-gray-400 font-medium">
+          <p className="text-gray-500 font-medium">
             No meals found for this ingredient
           </p>
         </div>
@@ -141,7 +141,7 @@ export default function IngredientsDetailPage() {
       {!loading && !error && filtered.length === 0 && search && (
         <div className="text-center py-16">
           <div className="text-5xl mb-4">🔍</div>
-          <p className="text-gray-400 font-medium">
+          <p className="text-gray-500 font-medium">
             No meals match &quot;{search}&quot;
           </p>
         </div>

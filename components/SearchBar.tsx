@@ -30,10 +30,10 @@ export default function SearchBar({
         }`}
       />
       <div
-        className={`relative flex items-center w-full rounded-xl border transition-all duration-300 bg-[#111] backdrop-blur-sm ${
+        className={`relative flex items-center w-full rounded-xl border transition-all duration-300 bg-white backdrop-blur-sm ${
           focused
-            ? "border-orange-500/50 shadow-lg shadow-orange-500/10"
-            : "border-[#222] hover:border-[#333]"
+            ? "border-orange-400 shadow-lg shadow-orange-500/5"
+            : "border-gray-200 hover:border-gray-300"
         }`}
       >
         <div className="pl-4 pr-2 text-gray-400">
@@ -58,12 +58,12 @@ export default function SearchBar({
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           placeholder={placeholder}
-          className="flex-1 bg-transparent px-2 py-4 text-white placeholder-gray-500 outline-none text-sm"
+          className="flex-1 bg-transparent px-2 py-4 text-gray-900 placeholder-gray-400 outline-none text-sm"
         />
         {value && (
           <button
             onClick={() => onSearch("")}
-            className="pr-4 text-gray-500 hover:text-white transition-colors"
+            className="pr-4 text-gray-400 hover:text-gray-600 transition-colors"
           >
             <svg
               className="w-4 h-4"

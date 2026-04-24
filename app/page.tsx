@@ -44,17 +44,17 @@ export default function IngredientsPage() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       {/* Hero */}
       <div className="text-center mb-12 animate-fade-in-up">
-        <div className="inline-flex items-center gap-2 bg-orange-500/10 border border-orange-500/20 rounded-full px-4 py-2 text-orange-400 text-sm font-medium mb-6">
+        <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200 rounded-full px-4 py-2 text-orange-600 text-sm font-medium mb-6">
           <span>🍽</span>
           <span>TheMealDB Explorer</span>
         </div>
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight">
           Explore{" "}
-          <span className="bg-gradient-to-r from-orange-400 to-rose-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent">
             Ingredients
           </span>
         </h1>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
           Browse hundreds of ingredients and discover the recipes that use them.
           Click on any ingredient to explore its meals.
         </p>
@@ -95,10 +95,10 @@ export default function IngredientsPage() {
       {!loading && !error && filtered.length === 0 && search && (
         <div className="text-center py-16">
           <div className="text-5xl mb-4">🔍</div>
-          <p className="text-gray-400 font-medium mb-2">
+          <p className="text-gray-500 font-medium mb-2">
             No ingredients found for &quot;{search}&quot;
           </p>
-          <p className="text-gray-500 text-sm">Try a different search term</p>
+          <p className="text-gray-400 text-sm">Try a different search term</p>
         </div>
       )}
 
