@@ -43,7 +43,7 @@ export async function fetchMealsByIngredient(
 ): Promise<MealThumb[]> {
   const res = await fetch(
     `${BASE_URL}/filter.php?i=${encodeURIComponent(ingredient)}`,
-    { next: { revalidate: 3600 } }
+    { next: { revalidate: 0 } }
   );
   if (!res.ok) throw new Error("Failed to fetch meals");
   const data = await res.json();

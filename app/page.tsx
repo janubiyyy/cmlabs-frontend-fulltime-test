@@ -50,27 +50,34 @@ export default function IngredientsPage() {
   const featuredIngredients = ingredients.slice(0, 10);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 overflow-hidden">
+      {/* Decorative Blob */}
+      <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-gradient-to-r from-orange-400/20 to-rose-400/20 blur-[100px] rounded-full mix-blend-multiply opacity-60 animate-pulse pointer-events-none" />
+      
       {/* Hero */}
-      <div className="text-center mb-12 animate-fade-in-up">
-        <div className="inline-flex items-center gap-2 bg-orange-50 border border-orange-200 rounded-full px-4 py-2 text-orange-600 text-sm font-medium mb-6">
-          <span>🍽</span>
+      <div className="relative text-center mb-12 animate-fade-in-up z-10">
+        <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm shadow-sm border border-orange-100 rounded-full px-5 py-2.5 text-orange-600 text-sm font-bold mb-8 hover:scale-105 hover:shadow-lg hover:shadow-orange-500/10 transition-all duration-300 spring-bounce cursor-default">
+          <span className="animate-bounce">🍽</span>
           <span>TheMealDB Explorer</span>
         </div>
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight">
+        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 mb-6 leading-tight tracking-tight">
           Explore{" "}
-          <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent">
-            Ingredients
+          <span className="relative inline-block">
+            <span className="bg-gradient-to-r from-orange-500 via-rose-500 to-orange-500 bg-[length:200%_auto] animate-shimmer bg-clip-text text-transparent">
+              Ingredients
+            </span>
+            {/* Sparkle */}
+            <span className="absolute -top-3 -right-6 text-2xl animate-spin-slow">✨</span>
           </span>
         </h1>
-        <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-500 text-lg sm:text-xl font-medium max-w-2xl mx-auto leading-relaxed">
           Browse hundreds of ingredients and discover the recipes that use them.
           Click on any ingredient to explore its meals.
         </p>
       </div>
 
       {/* Search */}
-      <div className="max-w-xl mx-auto mb-10">
+      <div className="relative max-w-2xl mx-auto mb-16 z-10 group">
         <SearchBar
           placeholder="Search ingredients (e.g. Chicken, Garlic, Tomato...)"
           onSearch={handleSearch}
@@ -114,19 +121,19 @@ export default function IngredientsPage() {
       {/* Featured Slider (Hidden during search) */}
       {!loading && !error && !search && featuredIngredients.length > 0 && (
         <div className="mb-16 animate-fade-in-up">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">
-              Top Categories
+          <div className="flex items-center justify-between mb-6 px-2">
+            <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight flex items-center gap-2">
+              <span className="text-rose-500">🔥</span> Top Categories
             </h2>
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               <button 
                 onClick={() => document.getElementById('featured-slider')?.scrollBy({ left: -300, behavior: 'smooth' })}
-                className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-400 hover:text-gray-900 hover:shadow-md transition-all">
+                className="w-11 h-11 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center text-gray-500 hover:text-orange-500 hover:border-orange-200 hover:shadow-orange-500/10 transition-all spring-bounce hover:scale-110">
                 ←
               </button>
               <button 
                 onClick={() => document.getElementById('featured-slider')?.scrollBy({ left: 300, behavior: 'smooth' })}
-                className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-400 hover:text-gray-900 hover:shadow-md transition-all">
+                className="w-11 h-11 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center text-gray-500 hover:text-orange-500 hover:border-orange-200 hover:shadow-orange-500/10 transition-all spring-bounce hover:scale-110">
                 →
               </button>
             </div>
@@ -135,11 +142,11 @@ export default function IngredientsPage() {
           {/* Snap scrolling horizontal slider */}
           <div 
             id="featured-slider"
-            className="flex overflow-x-auto gap-4 sm:gap-6 pb-6 snap-x snap-mandatory hide-scrollbar"
+            className="flex overflow-x-auto gap-5 pb-8 pt-2 px-2 snap-x snap-mandatory hide-scrollbar -mx-2"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {featuredIngredients.map((ing, i) => (
-              <div key={`featured-${ing.idIngredient}`} className="snap-start shrink-0 w-[160px] sm:w-[200px]">
+              <div key={`featured-${ing.idIngredient}`} className="snap-start shrink-0 w-[180px] sm:w-[220px]">
                 <IngredientCard name={ing.strIngredient} index={i + 10} />
               </div>
             ))}
@@ -149,7 +156,7 @@ export default function IngredientsPage() {
 
       {/* Grid Header */}
       {!loading && !error && (
-        <h2 className="text-2xl font-bold text-gray-900 mb-6 px-1">
+        <h2 className="text-3xl font-extrabold text-gray-900 mb-8 px-2 tracking-tight">
           {search ? "Search Results" : "All Ingredients"}
         </h2>
       )}

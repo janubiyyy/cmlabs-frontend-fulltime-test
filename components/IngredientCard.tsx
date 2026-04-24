@@ -27,7 +27,7 @@ export default function IngredientCard({ name, index }: IngredientCardProps) {
   return (
     <Link
       href={`/ingredients/${encodeURIComponent(name)}`}
-      className="group relative bg-white hover:bg-gray-50 border border-gray-200 hover:border-gray-300 rounded-2xl overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-orange-500/10 cursor-pointer"
+      className="group relative bg-white hover:bg-orange-50/50 border border-gray-100 hover:border-orange-200 rounded-2xl overflow-hidden transition-all duration-500 spring-bounce hover:-translate-y-2 hover:shadow-2xl hover:shadow-orange-500/15 cursor-pointer"
     >
       {/* gradient top bar */}
       <div className={`h-1 w-full bg-gradient-to-r ${colorClass}`} />
@@ -40,7 +40,7 @@ export default function IngredientCard({ name, index }: IngredientCardProps) {
             alt={name}
             width={80}
             height={80}
-            className="object-contain w-full h-full group-hover:scale-110 transition-transform duration-300"
+            className="object-contain w-full h-full group-hover:scale-[1.15] group-hover:-rotate-6 transition-transform duration-500 spring-bounce"
             onError={() => {}}
             unoptimized
           />
